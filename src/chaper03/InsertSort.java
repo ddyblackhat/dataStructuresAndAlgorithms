@@ -6,13 +6,13 @@ package chaper03;
  *
  */
 
-class ArrayBub1 {
+class ArrayInsert {
 
 	private long[] a;
 	private int nElems;
 
 	// ---------------------------------------
-	public ArrayBub1(int max) { // constructor
+	public ArrayInsert(int max) { // constructor
 		a = new long[max];
 		nElems = 0;
 	}
@@ -30,17 +30,23 @@ class ArrayBub1 {
 		System.out.println("");
 	}
 
-	public void selectSort(){  // selectSort 只交换N次，min为指向最小的下标 
-		int out, in , min = 0;
-		for(out = 0; out < nElems -1;out++){
-			min = out;
-			for(in = out+1; in< nElems; in++){
-				if(a[in] < a[min]){
-					min = in;
-				}
+	/**
+	 * 在外层的for 循环中， out变量 从1 开始， 向右移动。 它标记了未排序部分的最左端的数据。
+	 * 而在内层的while循环中， in 变量从 out 变量开始， 向左移动， 直到temp变量小于in所指的
+	 * 数据项，或者它已经不能再往左移动为止。
+	 */
+	public void insertSort(){  
+		int out, in ;
+		for(out = 1; out < nElems; out ++){  // out is dividing line 
+			long temp = a[out];              // remove marked item 
+			in = out;
+			while( in > 0 && a[in-1] > temp ){
+				a[in] = a[in - 1 ];         //  shift item to right
+				--in;
 			}
-			swap(out,min);
+			a[in] = temp;
 		}
+		
 	}
 
 	private void swap(int one, int two) {
@@ -52,10 +58,10 @@ class ArrayBub1 {
 }
 
 /////////////////////////////////////////////////////
-public class SelectionSort {
+public class InsertSort {
 	public static void main(String[] args) {
 		int maxSize = 100;
-		ArrayBub1 arr = new ArrayBub1(maxSize);
+		ArrayInsert arr = new ArrayInsert(maxSize);
 
 		arr.insert(77); // insert 10 items
 		arr.insert(99);
@@ -70,8 +76,8 @@ public class SelectionSort {
 
 		arr.display();
 
-		arr.selectSort();
-
+		arr.insertSort();
+		
 		arr.display();
 
 	}
