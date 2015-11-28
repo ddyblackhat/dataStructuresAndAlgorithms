@@ -6,17 +6,17 @@ package chaper03;
  *
  */
 
-class ArrayBub {
+class ArrayBub1 {
 
 	private long[] a;
 	private int nElems;
 
 	// ---------------------------------------
-	public ArrayBub(int max) { // constructor
+	public ArrayBub1(int max) { // constructor
 		a = new long[max];
 		nElems = 0;
 	}
- 
+
 	// ------------------------------------
 	public void insert(long value) { // put elements into array
 		a[nElems] = value;
@@ -30,16 +30,18 @@ class ArrayBub {
 		System.out.println("");
 	}
 
-	public void bubbleSort() {
-		int out, in;
-
-		for (out = nElems - 1; out > 1; out--) { // outer loop(backward)
-			for (in = 0; in < out; in++) { // inner loop(forward)
-				if (a[in] > a[in + 1]) // out of order?
-					swap(in, in + 1); // swap them
+	public void selectSort(){  // selectSort  
+		int out, in , min = 0;
+		for(out = 0; out < nElems -1;out++){
+			min = out;
+			for(in = out+1; in< nElems; in++){
+				if(a[in] < a[min]){
+					min = in;
+				}
 			}
+			swap(out,min);
 		}
-	} // end bubbleSort
+	}
 
 	private void swap(int one, int two) {
 
@@ -50,10 +52,10 @@ class ArrayBub {
 }
 
 /////////////////////////////////////////////////////
-public class BubbleSort {
+public class SelectionSort {
 	public static void main(String[] args) {
 		int maxSize = 100;
-		ArrayBub arr = new ArrayBub(maxSize);
+		ArrayBub1 arr = new ArrayBub1(maxSize);
 
 		arr.insert(77); // insert 10 items
 		arr.insert(99);
@@ -68,7 +70,7 @@ public class BubbleSort {
 
 		arr.display();
 
-		arr.bubbleSort();
+		arr.selectSort();
 
 		arr.display();
 
