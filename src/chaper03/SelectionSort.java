@@ -30,16 +30,16 @@ class ArrayBub1 {
 		System.out.println("");
 	}
 
-	public void selectSort(){  // selectSort 只交换N次，min为指向最小的下标 
-		int out, in , min = 0;
-		for(out = 0; out < nElems -1;out++){
+	public void selectSort() { // selectSort 只交换N次，min为指向最小的下标
+		int out, in, min = 0;
+		for (out = 0; out < nElems - 1; out++) {
 			min = out;
-			for(in = out+1; in< nElems; in++){
-				if(a[in] < a[min]){
+			for (in = out + 1; in < nElems; in++) {
+				if (a[in] < a[min]) {
 					min = in;
 				}
 			}
-			swap(out,min);
+			swap(out, min);
 		}
 	}
 
@@ -54,25 +54,20 @@ class ArrayBub1 {
 /////////////////////////////////////////////////////
 public class SelectionSort {
 	public static void main(String[] args) {
-		int maxSize = 100;
+		int maxSize = 10000;
 		ArrayBub1 arr = new ArrayBub1(maxSize);
+		for (int j = 0; j < maxSize; j++) {
+			long n = (long) (java.lang.Math.random() * (maxSize - 1));
+			arr.insert(n);
+		}
 
-		arr.insert(77); // insert 10 items
-		arr.insert(99);
-		arr.insert(44);
-		arr.insert(55);
-		arr.insert(22);
-		arr.insert(88);
-		arr.insert(11);
-		arr.insert(00);
-		arr.insert(66);
-		arr.insert(33);
-
-		arr.display();
+		// arr.display();
+		long start = System.currentTimeMillis();
 
 		arr.selectSort();
 
-		arr.display();
-
+		long end = System.currentTimeMillis();
+		System.out.println("Time " + (end - start));
+		// arr.display();
 	}
 }
